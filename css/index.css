@@ -1,0 +1,97 @@
+html, body{
+    width: 100%;
+    height: 100%;
+}
+li{
+    list-style: none;
+}
+#container{
+    width: 1024px;
+    margin: 0 auto;
+}
+.header{
+    height: 70px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid #f3f3f3;
+    background: #fff;
+}
+.header div{
+    width: 1024px;
+    margin: 0 auto;
+}
+.header h1{
+    font-size: 40px;
+    height: 70px;
+    line-height: 70px;
+    float: left;
+}
+.header h1 .today{
+    color: #8acfdb;
+}
+.header h1 .food{
+    color: #df2e2c;
+}
+.header input{
+    width: 300px;
+    height: 40px;
+    outline: none;
+    padding: 5px;
+    font-size: 20px;
+    background-color: #eee;
+    border: 1px solid #eee;
+    margin: 8px 0 0 30px;
+    float: left;
+}
+.header input:focus{
+    background-color: #fff;
+}
+.header button{
+    height: 52px;
+    width: 82px;
+    float: left;
+    background-color: #df2e2c;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    margin-top: 8px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+.header button:hover{
+    opacity: 1;
+    outline: none;
+}
+.list{
+    margin-top: 70px;
+}
+.list li{
+    height: 200px;
+    padding: 30px 0;
+}
+.list li .list-img{
+    width: 200px;
+    height: 200px;
+    float: left;
+    overflow: hidden;
+}
+.list li .list-img img{
+    width: 100%;
+    height: 100%;
+    transition: all 0.2s;
+}
+.list li .list-img img:hover{
+    transform: scale(1.2);
+}
+.list li .list-desc{
+    float: left;
+    width: 800px;
+    margin-left: 24px;
+}
+.list li .list-desc h4{
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #666;
+}
