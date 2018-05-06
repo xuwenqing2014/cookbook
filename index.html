@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
@@ -8,55 +9,120 @@
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/index.css">
 </head>
+
 <body>
     <section id="container">
         <header class="header">
             <div>
                 <h1>
-                    <span class="today">今日</span><span  class="food">菜谱</span>
+                    <span class="today">今日</span>
+                    <span class="food">菜谱</span>
                 </h1>
-                <input type="text" placeholder="搜索菜谱">
-                <button type="button">搜索一下</button>
+                <input class="search" id="searchInput" type="text" placeholder="搜索菜谱">
+                <button class="search-btn" id="searchBtn" type="button">搜索一下</button>
+                <button type="button" id="addBtn">添加菜谱</button>
             </div>
         </header>
-        <ul class="list">
-            <li>
-                <div class="list-img">
-                    <img src="./images/xihongshicaojidan.jpg" alt="">
-                </div>
-                <div class="list-desc">
-                    <h4>糖醋排骨</h4>
-                    <p>~西红柿炒鸡蛋，那可是是小编很喜欢一道菜哟。这道菜有着我的回忆，如果要选择一道菜天天吃的话，西红柿炒鸡蛋就是我的首选。小编最喜欢西红柿炒的软软的，喜欢西红柿汁的宝宝们可以多加水，这样煮出来就是红黄相间的美味佳肴啦。</p>
-                </div>
-            </li>
-            <li>
-                <div class="list-img">
-                    <img src="./images/xihongshicaojidan.jpg" alt="">
-                </div>
-                <div class="list-desc">
-                    <h4>糖醋排骨</h4>
-                    <p>~西红柿炒鸡蛋，那可是是小编很喜欢一道菜哟。这道菜有着我的回忆，如果要选择一道菜天天吃的话，西红柿炒鸡蛋就是我的首选。小编最喜欢西红柿炒的软软的，喜欢西红柿汁的宝宝们可以多加水，这样煮出来就是红黄相间的美味佳肴啦。</p>
-                </div>
-            </li>
-            <li>
-                <div class="list-img">
-                    <img src="./images/xihongshicaojidan.jpg" alt="">
-                </div>
-                <div class="list-desc">
-                    <h4>糖醋排骨</h4>
-                    <p>~西红柿炒鸡蛋，那可是是小编很喜欢一道菜哟。这道菜有着我的回忆，如果要选择一道菜天天吃的话，西红柿炒鸡蛋就是我的首选。小编最喜欢西红柿炒的软软的，喜欢西红柿汁的宝宝们可以多加水，这样煮出来就是红黄相间的美味佳肴啦。</p>
-                </div>
-            </li>
-            <li>
-                <div class="list-img">
-                    <img src="./images/xihongshicaojidan.jpg" alt="">
-                </div>
-                <div class="list-desc">
-                    <h4>糖醋排骨</h4>
-                    <p>~西红柿炒鸡蛋，那可是是小编很喜欢一道菜哟。这道菜有着我的回忆，如果要选择一道菜天天吃的话，西红柿炒鸡蛋就是我的首选。小编最喜欢西红柿炒的软软的，喜欢西红柿汁的宝宝们可以多加水，这样煮出来就是红黄相间的美味佳肴啦。</p>
-                </div>
-            </li>
+        <ul class="list" id="list">
         </ul>
+        <p class="no-data hide" id="noData">没有搜索到相关内容，请更换关键词重试！！！</p>
     </section>
+    <div class="modal hide" id="modal">
+        <div class="no-extension">
+            提示：请先安装
+            <a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a>
+        </div>
+    </div>
+    <div class="modal add hide" id="add">
+        <div class="add-container">
+            <h3>添加菜谱
+                <span id="closeBtn">&times;</span>
+            </h3>
+            <p>
+                <input id="title" type="text" placeholder="请输入菜谱名称">
+            </p>
+            <p>
+                <input id="imgUrl" type="text" placeholder="请输入菜谱图片网页链接">
+            </p>
+            <p>
+                <textarea id="description" placeholder="请输入菜谱描述"></textarea>
+            </p>
+            <p>
+                <textarea id="content" placeholder="请输入菜谱内容"></textarea>
+            </p>
+            <div>
+                <button type="button" class="primary" id="confirmAddBtn">确认添加</button>
+                <button type="button" class="white" id="cancelAddBtn">取消</button>
+            </div>
+        </div>
+    </div>
+    <script src="./js/jquery-3.3.1.min.js"></script>
+    <script src="./js/nebPay.js"></script>
+    <script>
+        var NebPay = require("nebpay");
+        var nebPay = new NebPay();
+        if (typeof (webExtensionWallet) === "undefined") {
+            $("#modal").removeClass("hide")
+        }
+        var dappAddress = "n1shmqNHejghxoCKfA6bdQKz1wuyKDiGywC";
+        search('西红柿炒鸡蛋3');
+        $('#addBtn').click(show);
+        function close() {
+            $('#add').hide();
+        }
+        function show() {
+            $('#add').show();
+        }
+        $('#cancelAddBtn').click(close);
+        $('#closeBtn').click(close);
+        $('#confirmAddBtn').click(function () {
+            var to = dappAddress;
+            var value = "0";
+            var callFunction = "save";
+            var callArgs = "[\"" + $("#title").val() + "\",\"" + $('#title').val() + "\",\"" + $('#imgUrl').val() + "\",\"" + $('#description').val() + "\",\"" + $('#content').val() + "\"]";
+            console.log(callArgs)
+            nebPay.call(to, value, callFunction, callArgs, {    //使用nebpay的call接口去调用合约,
+                listener: cbPush
+            });
+        });
+        function cbPush(resp) {
+            close();
+            console.log("response of push: " + resp);
+        }
+        $('#searchBtn').click(function () {
+            search();
+        });
+        function search(keywords) {
+            var to = dappAddress;
+            var value = "0";
+            var callFunction = "get";
+            var callArgs = "[\"" + (keywords ? keywords : $("#searchInput").val()) + "\"]"; //in the form of ["args"]
+            nebPay.simulateCall(to, value, callFunction, callArgs, {    //使用nebpay的simulateCall接口去执行get查询, 模拟执行.不发送交易,不上链
+                listener: cbSearch      //指定回调函数
+            });
+        }
+        function cbSearch(resp) {
+            var result = resp.result;
+            console.log(result)
+            if (result === 'null') {
+                $('#noData').show();
+                $('#list').hide();
+            } else {
+                try {
+                    result = JSON.parse(result)
+                } catch (err) {
+                    //result is the error message
+                }
+                if (result && result.key) {
+                    var html = '<li><div class="list-img"><img src="'+result.imgUrl+'" alt=""></div><div class="list-desc"><h4>'+result.title+'</h4><p>'+result.description+'</p></div></li>';
+                    $('#list').empty();
+                    $('#list').append(html);
+                } else {
+
+                }
+            }
+        }
+    </script>
 </body>
+
 </html>

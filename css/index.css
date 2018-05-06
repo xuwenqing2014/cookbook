@@ -59,6 +59,7 @@ li{
     margin-top: 8px;
     cursor: pointer;
     opacity: 0.7;
+    margin-right: 10px;
 }
 .header button:hover{
     opacity: 1;
@@ -94,4 +95,92 @@ li{
     font-size: 30px;
     margin-bottom: 20px;
     color: #666;
+}
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.modal .no-extension{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 30px;
+}
+.hide{
+    display: none;
+}
+.add .add-container{
+    height: 523px;
+    width: 600px;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+.add .add-container h3{
+    line-height: 40px;
+    font-size: 20px;
+    padding-left: 30px;
+    border-bottom: 1px solid #f3f3f3;
+}
+.add .add-container h3 span{
+    float: right;
+    margin-right: 30px;
+    cursor: pointer;
+}
+.add .add-container p{
+    margin: 15px 30px;
+}
+.add .add-container p input{
+    height: 30px;
+    width: 528px;
+    padding: 5px;
+    outline: none;
+}
+.add .add-container p textarea{
+    width: 528px;
+    height: 120px;
+    resize: none;
+    padding: 5px;
+    outline: none;
+}
+.add .add-container div{
+    height: 40px;
+    text-align: right;
+}
+.add .add-container div button{
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.add .add-container div button.primary{
+    background-color: #8acfdb;
+    color: #fff;
+    border: 1px solid #8acfdb;
+    margin-right: 10px;
+}
+.add .add-container div button.primary:hover{
+    opacity: 0.8;
+}
+.add .add-container div button.white{
+    background-color: #fff;
+    color: #aaa;
+    border: 1px solid #ccc;
+    margin-right: 30px;
+}
+add .add-container div button.white:hover{
+    background-color: #ccc;
+}
+.no-data{
+    margin-top: 170px;
+    line-height: 40px;
+    font-size: 30px;
+    text-align: center;
 }
